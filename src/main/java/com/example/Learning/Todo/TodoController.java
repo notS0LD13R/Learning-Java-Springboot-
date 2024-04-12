@@ -16,7 +16,6 @@ public class TodoController {
 
     @GetMapping("/byID/{id}")
     Optional<TodoModel> getTodo(@PathVariable String id) {
-        System.out.println(id);
         return service.getTodoById(id);
     }
 
@@ -28,7 +27,6 @@ public class TodoController {
     @PostMapping("/")
     ResponseEntity<TodoModel> addTodo(@RequestBody TodoModel todo) {
         if (todo.getId() == null || todo.getValue() == null) {
-            System.out.println("Todo is null" + todo);
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(service.addTodo(todo), HttpStatus.OK);
@@ -38,7 +36,6 @@ public class TodoController {
     ResponseEntity<?> updateTodo(@RequestBody TodoModel todo) {
         try {
             if (todo.getId() == null || todo.getValue() == null) {
-                System.out.println("Todo is null" + todo);
                 throw new IllegalArgumentException("Todo properties cannot be null");
             }
 
